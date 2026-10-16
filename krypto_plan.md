@@ -21,8 +21,8 @@ Menedżer haseł z lokalną bazą danych. Aplikacja przechowująca hasła użytk
 * Version Control: GitHub
 
 
-**Schemat architektury aplikacji:![Schemat architektury aplikacji](assets/schemat_architektury.png)
-**
+**Schemat architektury aplikacji:**![Schemat architektury aplikacji](assets/schemat_architektury.png)
+
 
 
 **Plan etapowy projektu (8 tygodni):**
