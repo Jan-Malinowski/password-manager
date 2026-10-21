@@ -1,12 +1,15 @@
 **Skład:**
-Antoni Łukasiewicz
-Wiktor Leszczyński
+Antoni Łukasiewicz,
+Wiktor Leszczyński,
 Jan Malinowski
 
 
 **Temat:**
-Menedżer haseł z lokalną bazą danych. Aplikacja przechowująca hasła użytkownika w zaszyfrowanym pliku JSON. Wykorzystanie funkcji PBKDF2 do wyprowadzenia klucza z hasła głównego oraz algorytm AES w trybie CBC do szyfrowania bazy.
+Aplikacja to bezpieczny, lokalny menedżer haseł, który przechowuje poufne dane użytkownika w zaszyfrowanym pliku JSON. 
 
+Wykorzystanie funkcji PBKDF2 do wyprowadzenia klucza z hasła głównego oraz algorytm AES w trybie CBC do szyfrowania bazy.
+
+Głównym założeniem i wyzwaniem projektu jest własnoręczna implementacja mechanizmów kryptograficznych od zera. Projekt ma na celu dogłębne zrozumienie matematyki i logiki stojącej za standardami kryptograficznymi.
 
 **Stos technologiczny:**
 
@@ -18,7 +21,7 @@ Menedżer haseł z lokalną bazą danych. Aplikacja przechowująca hasła użytk
 
 * Przechowywanie danych: JSON
 
-* Version Control: GitHub
+* Platforma projektowa: GitHub
 
 
 **Schemat architektury aplikacji:**<br>
@@ -33,9 +36,7 @@ Menedżer haseł z lokalną bazą danych. Aplikacja przechowująca hasła użytk
 
   * Konfiguracja środowiska
 
-  * Zaprojektowanie modeli danych
-
-  * Zaprojektowanie początkowej struktury pliku bazy
+  * Zaprojektowanie modeli danych i struktury pliku bazy danych
 
 * **Implementacja modułu kryptograficznego (tydzień 2-4)**
 
@@ -46,6 +47,8 @@ Menedżer haseł z lokalną bazą danych. Aplikacja przechowująca hasła użytk
   * Szyfrowanie i deszyfrowanie bazy danych za pomocą AES-CBC
 
   * Weryfikacja integralności i hasła głównego (SHA-256)
+ 
+  * Testowanie modułu kryptograficznego
 
 * **Zarządzanie plikami (tydzień 5)**
 
@@ -63,13 +66,14 @@ Menedżer haseł z lokalną bazą danych. Aplikacja przechowująca hasła użytk
 
 * **Testowanie i bezpieczeństwo (tydzień 8)**
 
-  * Testy jednostkowe
+  * Końcowe testy aplikacji
 
   * Obsługa błędów i finalizacja kodu
 
 
 ![harmonogram projetku](assets/harmonogram_projektu.png)
 
+**Rozkład pracy na poszczególne osoby:**
 
 **Etap 2: Własny moduł kryptograficzny**
 
