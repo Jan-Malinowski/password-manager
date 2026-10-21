@@ -1,15 +1,14 @@
-**Skład:**
-Antoni Łukasiewicz,
-Wiktor Leszczyński,
-Jan Malinowski
+**Skład:**<br>
+* Antoni Łukasiewicz,
+* Wiktor Leszczyński,
+* Jan Malinowski
+<br>
 
-
-**Temat:**
-Aplikacja to bezpieczny, lokalny menedżer haseł, który przechowuje poufne dane użytkownika w zaszyfrowanym pliku JSON. 
-
-Wykorzystanie funkcji PBKDF2 do wyprowadzenia klucza z hasła głównego oraz algorytm AES w trybie CBC do szyfrowania bazy.
-
-Głównym założeniem i wyzwaniem projektu jest własnoręczna implementacja mechanizmów kryptograficznych od zera. Projekt ma na celu dogłębne zrozumienie matematyki i logiki stojącej za standardami kryptograficznymi.
+**Temat:**<br>
+Aplikacja to bezpieczny, lokalny menedżer haseł, który przechowuje poufne dane użytkownika w zaszyfrowanym pliku JSON.<br>
+Wykorzystanie funkcji PBKDF2 do wyprowadzenia klucza z hasła głównego oraz algorytm AES w trybie CBC do szyfrowania bazy.<br>
+Głównym założeniem i wyzwaniem projektu jest własnoręczna implementacja mechanizmów kryptograficznych z wykorzystaniem niskopoziomowych bibliotek. Projekt ma na celu dogłębne zrozumienie matematyki i logiki stojącej za standardami kryptograficznymi.
+<br>
 
 **Stos technologiczny:**
 
@@ -26,9 +25,8 @@ Głównym założeniem i wyzwaniem projektu jest własnoręczna implementacja me
 
 **Schemat architektury aplikacji:**<br>
 
-
 ![Schemat architektury aplikacji](assets/schemat_architektury.png)
-
+<br>
 
 **Plan etapowy projektu (8 tygodni):**
 
@@ -72,6 +70,7 @@ Głównym założeniem i wyzwaniem projektu jest własnoręczna implementacja me
 
 
 ![harmonogram projetku](assets/harmonogram_projektu.png)
+<br>
 
 **Rozkład pracy na poszczególne osoby:**
 
