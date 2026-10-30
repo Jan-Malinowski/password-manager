@@ -1,0 +1,20 @@
+Notatka ze spotkania nr. 1
+
+Projekt: Menedżer haseł z lokalną bazą
+
+Data: 30.10.2026
+
+Ustalenia i wstępna realizacja:
+
+Środowisko: Skonfigurowanie wspólnego wirtualnego środowiska (venv) pod Pythona 3.10+ oraz dodanie .gitignore i szkieletu plików (main.py).
+
+Wymagania (requirements.txt): Stworzenie osobnego pliku w którym będą zapisywane biblioteki używane w projekcie.
+
+Format pliku bazy (.json):
+
+Utworzenie wstępnej struktury pliku passwords.json, w celu zachowania spójności kodu.
+Plik (po odszyfrowaniu) to standardowy słownik z wpisami: id, nazwa serwisu, login, hasło, url strony i data utworzenie i ostatniej edycji.
+
+Przyszłe zadania:
+
+Po ustaleniu zadać oraz przygotowaniu środowiska każdy w przyszłych tygodniach zacznie realizowac swoje zadania z etapu 2 (moduł kryptograficzny).
