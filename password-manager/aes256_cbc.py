@@ -1,4 +1,4 @@
-from AES import AES256CORE
+from aes256 import AES256CORE
 
 def pad_pkcs7(data: bytes, block_size: int = 16) -> bytes:
     pad_len = block_size - (len(data) % block_size) # obliczanie ile bajtow brakuje do pelnego bloku
