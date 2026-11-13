@@ -1,4 +1,4 @@
-from AES import AES256Core
+from AES import AES256CORE
 
 def pad_pkcs7(data: bytes, block_size: int = 16) -> bytes:
     pad_len = block_size - (len(data) % block_size) # obliczanie ile bajtow brakuje do pelnego bloku
@@ -23,7 +23,7 @@ class AES256CBC:
             print("Error: zla dlugosc wektora inicjalizacji")
             exit(0)
 
-        self.aes_core = AES256Core(key)
+        self.aes_core = AES256CORE(key)
         self.iv = iv
 
     def encrypt(self, plaintext: bytes) -> bytes:
