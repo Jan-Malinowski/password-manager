@@ -4,7 +4,7 @@ import getpass
 
 # wersja demo - funkcje do scalenia w tematyczne pliki python
 from aes256_cbc import AES256CBC
-from salt_hmac_pbkdf2 import modol_krypto
+from salt_hmac_pbkdf2 import Modol_Krypto
 from encode_decode_base64 import encode_to_base64, decode_from_base64
 from database_control import save_database, load_database, deserialize_data, serialize_data # do dokonczenia w ramach etapu 3
 
@@ -14,7 +14,7 @@ def main():
     # wlaczenie aplikacji
 
     # inicjalizacja modulu krypto 
-    crypto = modol_krypto()
+    crypto = Modol_Krypto()
     # wczytanie bazy hasel
     db_data = load_database(DB_FILE)
 

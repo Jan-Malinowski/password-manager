@@ -1,7 +1,7 @@
 import os
 import hashlib
 
-class modol_krypto:
+class Modol_Krypto:
     def __init__(self):
         self.block_size=64 # dlugosc bloku wejsciowego funkcji hashujacej
         self.hash_len=32 # dlugosc wyjscia funkcji hashujacej

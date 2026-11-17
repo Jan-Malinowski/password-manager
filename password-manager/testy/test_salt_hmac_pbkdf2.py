@@ -1,8 +1,8 @@
-from salt_hmac_pbkdf2 import modol_krypto
+from salt_hmac_pbkdf2 import Modol_Krypto
 
 def test_hmac():
     print("Testy funkcji HMAC-SHA-256:")
-    krypto=modol_krypto()
+    krypto=Modol_Krypto()
     key1=b'\x0b' * 20
     msg1="Hi There".encode("utf-8")
     result1="b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7"
@@ -59,7 +59,7 @@ def test_hmac():
 
 def test_pbkdf2():
     print("Testy funkcji PBKDF2-HMAC-SHA-256:")
-    krypto=modol_krypto()
+    krypto=Modol_Krypto()
     pa1="password".encode("utf-8")
     salt1="salt".encode("utf-8")
     c1=1
