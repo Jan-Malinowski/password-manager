@@ -69,53 +69,64 @@ def main():
 
         print("Wszystko ok - odblokowanie dostepu")
 
+    # funkcja pomocnicza sluzaca do zapisywania z pamieci RAM do pliku zaszyfrowanych hasel 
+    def save_to_db():
+        # generowanie nowego IV 
+        new_iv = crypto.generate_salt(16)
+        cipher = AES256CBC(key_64, new_iv)
 
-    while True:
-        print("\n\tMENU\n1. Dodaj nowe haslo\n2. Wyswietl hasla\n3. Wyjdz i zapisz\n")
-        mode = input("Podaj {1/2/3}: ")
+        serialized_vault = serialize_data(vault)
+        new_ciphertext = cipher.encrypt(serialized_vault)
 
-        if mode=="1":
-            service = input("Podaj nazwe serwisu: ")
-            login = input("Podaj login do serwisu: ")
-            password = input("podaj haslo do serwisu: ")
+        mac_tag=crypto.hmac_sha_256(key_64, new_iv + new_ciphertext)
+        
+        output_data = {
+            "crypto": {
+                "salt": encode_to_base64(salt),
+                "iv": encode_to_base64(new_iv),
+                "mac": encode_to_base64(mac_tag)
+            },
+            "ciphertext": encode_to_base64(new_ciphertext)
+        }
 
-            vault.append({"service": service, "login": login, "password": password})
-            print("dodanie do RAM")
-
-
-        elif mode=="2":
-            print("\tTwoje Hasla")
-            for id, cred in enumerate(vault, 1):
-                print(f"[{id}] {cred['service']} | Login: {cred['login']} | Haslo: {cred['password']}")
-
-        elif mode=="3":
-            # generowanie nowego IV 
-            new_iv = crypto.generate_salt(16)
-            cipher = AES256CBC(key_64, new_iv)
-
-            serialized_vault = serialize_data(vault)
-            new_ciphertext = cipher.encrypt(serialized_vault)
-
-            mac_tag=crypto.hmac_sha_256(key_64, new_iv + new_ciphertext)
-            
-            output_data = {
-                "crypto": {
-                    "salt": encode_to_base64(salt),
-                    "iv": encode_to_base64(new_iv),
-                    "mac": encode_to_base64(mac_tag)
-                },
-                "ciphertext": encode_to_base64(new_ciphertext)
-            }
-
-            if save_database(DB_FILE, output_data):
-                print("zapisano hasla poprawnie")
-                exit(0)
-            else:
-                print("Blad przy zapisywaniu bazy")
-                exit(1)
-
+        if save_database(DB_FILE, output_data):
+            print("zapisano hasla poprawnie")
+            exit(0)
         else:
-            print("Error: Podany number spoza zakresu")
+            print("Blad przy zapisywaniu bazy")
+            exit(1)
+
+
+    # glowna petla obslugujaca menu aplikacji umozliwiajaca dodanie, wyswietlenie i zapisanie hasel
+    try:
+        while True:
+            print("\n\tMENU\n1. Dodaj nowe haslo\n2. Wyswietl hasla\n3. Wyjdz i zapisz\n")
+            mode = input("Podaj {1/2/3}: ")
+
+            if mode=="1":
+                service = input("Podaj nazwe serwisu: ")
+                login = input("Podaj login do serwisu: ")
+                password = input("podaj haslo do serwisu: ")
+
+                vault.append({"service": service, "login": login, "password": password})
+                print("dodanie do RAM")
+
+
+            elif mode=="2":
+                print("\tTwoje Hasla")
+                for id, cred in enumerate(vault, 1):
+                    print(f"[{id}] {cred['service']} | Login: {cred['login']} | Haslo: {cred['password']}")
+
+            elif mode=="3":
+                save_to_db()
+
+            else:
+                print("Error: Podany number spoza zakresu")
+
+    # obsluga nacisniecia Ctrl-c aby nie utracic zmian                
+    except KeyboardInterrupt:
+        print("\n\nWykryto zakonczenie (Ctrl+c)")
+        save_to_db()
 
 if __name__ == "__main__":
     main()
