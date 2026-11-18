@@ -2,26 +2,26 @@ from aes256 import AES256CORE
 
 def pad_pkcs7(data: bytes, block_size: int = 16) -> bytes:
     pad_len = block_size - (len(data) % block_size) # obliczanie ile bajtow brakuje do pelnego bloku
-    data += bytes([pad_len] * pad_len)
-    return data
+    return data + bytes([pad_len] * pad_len)
 
 def unpad_pkcs7(data: bytes) -> bytes:
+    if not data:
+        raise ValueError("Error: Puste dane do usunięcia paddingu")
+        
     pad_len = data[-1] # pobranie wartosci paddingu
 
-    if pad_len<1 or pad_len>16:
-        print("Error: Bledna dlugosc padingu")
-        exit(0)
+    if pad_len < 1 or pad_len > 16:
+        raise ValueError("Error: Bledna dlugosc padingu")
 
     return data[:-pad_len]
 
-def xor(a: bytes, b:bytes) -> bytes:
+def xor(a: bytes, b: bytes) -> bytes:
     return bytes(x ^ y for x, y in zip(a, b))
 
 class AES256CBC:
     def __init__(self, key: bytes, iv: bytes):
         if len(iv) != 16:
-            print("Error: zla dlugosc wektora inicjalizacji")
-            exit(0)
+            raise ValueError("Error: zla dlugosc wektora inicjalizacji")
 
         self.aes_core = AES256CORE(key)
         self.iv = iv
@@ -41,6 +41,9 @@ class AES256CBC:
         return ciphertext
 
     def decrypt(self, ciphertext: bytes) -> bytes:
+        if len(ciphertext) % 16 != 0:
+            raise ValueError("Error: Długość szyfrogramu nie jest wielokrotnością 16 bajtów")
+            
         padded_plaintext = b""
         prev_block = self.iv
 
