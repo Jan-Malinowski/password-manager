@@ -1,0 +1,7 @@
+Notatka ze spotkania 2:
+
+Ustalono do zmian:
+- Ujednolicenie plików
+- Poprawa CBC - dodanie raiseError
+- Dodanie obsługi loadDatabase - tworzenie pliku bazy w przypadku jego braku
+- Dodanie ochrony przed padding oracle attack - zapisywanie hasha szyfrogramu bazy do pliku json
