@@ -36,3 +36,15 @@ class Modol_Krypto:
 
             dk+=t
         return dk[:dklen]
+    def const_time_compare_hmac(self, h1: bytes, h2: bytes) -> bool:
+        if len(h1)!=len(h2):
+            return False
+        
+        res=0
+        
+        for b1,b2 in zip(h1,h2):
+            res|=b1 ^ b2
+        if res==0:
+            return True
+        else:
+            return False

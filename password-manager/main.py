@@ -4,7 +4,7 @@ import getpass
 
 # wersja demo - funkcje do scalenia w tematyczne pliki python
 from aes256_cbc import AES256CBC
-from salt_hmac_pbkdf2 import Modol_Krypto
+from modol_krypto import Modol_Krypto
 from encode_decode_base64 import encode_to_base64, decode_from_base64
 from database_control import save_database, load_database, deserialize_data, serialize_data # do dokonczenia w ramach etapu 3
 
@@ -20,7 +20,7 @@ def main():
 
     #brak bazy lub klucza krypto - tworzenie od zera
     if not db_data or not db_data.get("crypto"):
-        print("niw ykryto istniejacej bazy danych")
+        print("nie wykryto istniejacej bazy danych")
         while True:
             master_pass = getpass.getpass("Podaj haslo glowne: ")
             conf_pass = getpass.getpass("Potwierdz haslo glowne: ")
@@ -43,14 +43,20 @@ def main():
         if b64_ciphertext:
             iv = decode_from_base64(db_data["crypto"]["iv"])
             ciphertext = decode_from_base64(b64_ciphertext)
+
+            saved_mac=decode_from_base64(db_data["crypto"]["mac"])
+            expected_mac=crypto.hmac_sha_256(key_64,iv + ciphertext)
+            
+            if not crypto.const_time_compare_hmac(saved_mac,expected_mac):
+                print("Error haslo nie poprawne lub plik bazy byl modyfikowany")
+                exit(1)
             
             try:
                 cipher = AES256CBC(key_64, iv)
                 decrypted_bytes = cipher.decrypt(ciphertext)
                 vault = deserialize_data(decrypted_bytes)
             except Exception as e:
-                # blędy z unpad_pkcs7 - zle haslo i z hmac.compare_digest - uszkodzony/edytowany plik
-                print(f"Error haslo nie poprawne lub plik uszkodzony")
+                print(f"Error blad podczas odszyfrowywania")
                 exit(1)
         else:
             vault = []
@@ -83,11 +89,14 @@ def main():
 
             serialized_vault = serialize_data(vault)
             new_ciphertext = cipher.encrypt(serialized_vault)
+
+            mac_tag=crypto.hmac_sha_256(key_64, new_iv + new_ciphertext)
             
             output_data = {
                 "crypto": {
                     "salt": encode_to_base64(salt),
-                    "iv": encode_to_base64(new_iv)
+                    "iv": encode_to_base64(new_iv),
+                    "mac": encode_to_base64(mac_tag)
                 },
                 "ciphertext": encode_to_base64(new_ciphertext)
             }
