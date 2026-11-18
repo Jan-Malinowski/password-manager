@@ -1,10 +1,19 @@
 import json
+from pathlib import Path
 
 def save_database(path: str, data: dict) -> bool:
-    pass
+    serialized_data = json.dumps(data, ensure_ascii=False, indent=4)
+    Path(path).write_text(serialized_data, encoding="utf-8")
+    return True
 
 def load_database(path: str) -> dict:
-    pass
+    with Path(path).open("r", encoding="utf-8") as database_file:
+        data = json.load(database_file)
+
+    if not isinstance(data, dict):
+        raise ValueError("Plik bazy danych musi zawierać obiekt JSON.")
+
+    return data
 
 def serialize_data(data: list) -> bytes:
     json_string = json.dumps(data)
