@@ -1,12 +1,10 @@
 import os
-import hashlib
 import getpass
 
-# wersja demo - funkcje do scalenia w tematyczne pliki python
 from aes256_cbc import AES256CBC
 from modol_krypto import Modol_Krypto
 from encode_decode_base64 import encode_to_base64, decode_from_base64
-from database_control import save_database, load_database, deserialize_data, serialize_data # do dokonczenia w ramach etapu 3
+from database_control import save_database, load_database, deserialize_data, serialize_data
 
 DB_FILE = "passwords.json"
 
@@ -15,6 +13,14 @@ def main():
 
     # inicjalizacja modulu krypto 
     crypto = Modol_Krypto()
+
+    if not os.path.exists(DB_FILE):
+        try:
+            with open(DB_FILE, "w", encoding="utf-8") as f:
+                f.write("{\n}")
+        except OSError as e:
+            print(f"Blad tworzenia pliku bazy danych: {e}")
+            exit(1)
     # wczytanie bazy hasel
     db_data = load_database(DB_FILE)
 
