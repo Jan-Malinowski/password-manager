@@ -1,5 +1,9 @@
 Notatka ze spotkania 2:
 
+Co zrobiono:
+- Doprecyzowano plan projektu
+- Ustalono bardziej szczegółowy i uzupełnony podział zadań i harmonogram projektu
+
 Ustalono do zmian:
 - Ujednolicenie plików
 - Poprawa CBC - dodanie raiseError

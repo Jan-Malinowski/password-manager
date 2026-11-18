@@ -36,7 +36,7 @@ Głównym założeniem i wyzwaniem projektu jest własnoręczna implementacja me
 
   * Zaprojektowanie modeli danych i struktury pliku bazy danych
 
-* **Implementacja modułu kryptograficznego (tydzień 2-4)**
+* **Implementacja modułu kryptograficznego (tydzień 2-3)**
 
   * Generator liczb pseudolosowych
 
@@ -48,13 +48,17 @@ Głównym założeniem i wyzwaniem projektu jest własnoręczna implementacja me
  
   * Testowanie modułu kryptograficznego
 
-* **Zarządzanie plikami (tydzień 5)**
+* **Zarządzanie plikami i aplikacja terminalowa (tydzień 4)**
 
   * Bezpieczne operacje wejścia i wyjścia
 
   * Klasa zarządzająca bazą
 
-* **Interfejs użytkownika i funkcje użytkowe (tydzień 6-7)**
+   * Stworzenie działającej aplikacji terminalowej
+
+  * Zabezpieczenie aplikacji przed padding oracle attack 
+  
+* **Interfejs użytkownika i funkcje użytkowe (tydzień 5-6)**
 
   * Warstwa interfejsu (CLI lub GUI) - w zależności od pozostałego czasu
 
@@ -62,7 +66,7 @@ Głównym założeniem i wyzwaniem projektu jest własnoręczna implementacja me
 
   * Obsługa schowka systemowego
 
-* **Testowanie i bezpieczeństwo (tydzień 8)**
+* **Testowanie i bezpieczeństwo (tydzień 7)**
 
   * Końcowe testy aplikacji
 
@@ -91,6 +95,7 @@ Głównym założeniem i wyzwaniem projektu jest własnoręczna implementacja me
 
 * **Jan Malinowski:** Kodowanie i dekodowanie binarnych wyników kryptograficznych (sól, wektor IV, szyfrogram) do formatu Base64, aby mogły zostać bezpiecznie zapisane w głównym pliku.
 
+* **Wspólnie:** Stworzenie działającej aplikacji terminalowej oraz przetestowanie zaimplementowanych funkcji. Zabezpieczenie przed oracle padding attack. Ujednolicenie i scalenie dotychczasowych plików.
 
 **Etap 4: Interfejs użytkownika i funkcje**
 
